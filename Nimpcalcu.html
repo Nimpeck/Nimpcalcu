@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nimpcalcu</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #F2F2F2;
+    }
+
+    .app-container {
+      max-width: 380px;
+      margin: 50px auto;
+      background-color: #fff;
+      border-radius: 30px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .app-header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .calculator {
+      padding: 20px;
+    }
+
+    .calculator input[type=text] {
+      width: 80%;
+      padding: 19px;
+      font-size: 29px;
+      border: 20%;
+      border-radius: 20px;
+      background-color: #F2F2F2;
+      color: #333;
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    .calculator button {
+      width: 60px;
+      height: 60px;
+      font-size: 22px;
+      margin: 5px;
+      background-color: #E5E5E5;
+      color: #333;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .calculator button:hover {
+      background-color: #D9D9D9;
+    }
+
+    .calculator button.operator {
+      background-color: #FFCC00;
+      color: #fff;
+    }
+
+    .calculator button.operator:hover {
+      background-color: #FFA700;
+    }
+
+    .calculator button.equals {
+      background-color: #007AFF;
+      color: #fff;
+    }
+
+    .calculator button.equals:hover {
+      background-color: #0064D9;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <div class="app-header">Nimpcalcu</div>
+    <div class="calculator">
+      <input type="text" id="result" placeholder="0" readonly>
+      <br><br>
+      <button onclick="trigonometric('sin')" class="operator">sin</button>
+      <button onclick="trigonometric('cos')" class="operator">cos</button>
+      <button onclick="trigonometric('tan')" class="operator">tan</button>
+      <button onclick="clearResult('del')" class="operator">Del</button>
+      <br>
+      <button onclick="appendToResult('7')">7</button>
+      <button onclick="appendToResult('8')">8</button>
+      <button onclick="appendToResult('9')">9</button>
+      <button onclick="appendToResult('/')" class="operator">/</button>
+      <br>
+      <button onclick="appendToResult('4')">4</button>
+      <button onclick="appendToResult('5')">5</button>
+      <button onclick="appendToResult('6')">6</button>
+      <button onclick="appendToResult('*')" class="operator">*</button>
+      <br>
+      <button onclick="appendToResult('1')">1</button>
+      <button onclick="appendToResult('2')">2</button>
+      <button onclick="appendToResult('3')">3</button>
+      <button onclick="appendToResult('-')" class="operator">-</button>
+      <br>
+      <button onclick="appendToResult('.')" class="operator">.</button>
+      <button onclick="appendToResult('0')">0</button>
+      <button onclick="calculate()" class="equals">=</button>
+      <button onclick="appendToResult('+')" class="operator">+</button>
+    </div>
+  </div>
+
+  <script>
+    function appendToResult(value) {
+      document.getElementById("result").value += value;
+    }
+
+    function calculate() {
+      try {
+        document.getElementById("result").value = eval(document.getElementById("result").value);
+      } catch (e) {
+        document.getElementById("result").value = "Error";
+      }
+    }
+
+    function clearResult() {
+      document.getElementById("result").value = "";
+    }
+
+    function trigonometric(func) {
+      var value = document.getElementById("result").value;
+      var result;
+      switch (func) {
+        case 'sin':
+          result = Math.sin(value * Math.PI / 180);
+          break;
+        case 'cos':
+          result = Math.cos(value * Math.PI / 180);
+          break;
+        case 'tan':
+          result = Math.tan(value * Math.PI / 180);
+          break;
+      }
+      document.getElementById("result").value = result.toFixed(2);
+    }
+  </script>
+</body>
+</html>
